@@ -2,7 +2,7 @@ import sys  # Access system parameters for QApplication
 from PyQt5.QtWidgets import QApplication, QMainWindow, QWidget, QVBoxLayout, QHBoxLayout, QLabel, QLineEdit, QSpinBox, QPushButton  # PyQt5 widgets
 from PyQt5.QtGui import QFont, QIcon  # Font and window icon
 from PyQt5.QtCore import Qt  # Alignment constants
-import time  # For countdown delays
+
 
 class PlayerSetupWindow(QMainWindow):
     def __init__(self):
@@ -37,39 +37,39 @@ class PlayerSetupWindow(QMainWindow):
            """)
         self.showMaximized()
 
-        self.player_inputs = []  # Create list to store player input fields
+        self.playerInputs = []  # Create list to store player input fields
 
         for i in range(6):  # Loop to create 6 player input fields
             label = QLabel("Player " + str(i + 1) + " Name:")  # Label for player
-            entry = QLineEdit()  # Text input field for player name
-            entry.setPlaceholderText("Enter name")  # Placeholder text for input
+            inputField = QLineEdit()  # Text input field for player name
+            inputField.context("Enter name")  # Gives context for what box does
             layout.addWidget(label, alignment=Qt.AlignHCenter)  # Center the label horizontally
-            layout.addWidget(entry, alignment=Qt.AlignHCenter)  # Center the input horizontally
-            self.player_inputs.append(entry)  # Save reference to input field for later use
+            layout.addWidget(inputField, alignment=Qt.AlignHCenter)  # Center the input horizontally
+            self.playerInputs.append(inputField)  # Save reference to input field for later use
 
-        capital_label = QLabel("Starting Capital (£):")  # Label for starting capital
-        self.capital_input = QSpinBox()  # Input spinner for capital
-        self.capital_input.setRange(1000, 50000)  # Set allowed range for capital
-        self.capital_input.setValue(25000)  # Set default value
-        layout.addWidget(capital_label, alignment=Qt.AlignHCenter)  # Center the label horizontally
-        layout.addWidget(self.capital_input, alignment=Qt.AlignHCenter)  # Center the input horizontally
+        capitalLabel = QLabel("Starting Capital (£):")  # Label for starting capital
+        self.capitalLabel = QSpinBox()  # Input spinner for capital
+        self.capitalLabel.setRange(1000, 50000)  # Set allowed range for capital
+        self.capitalLabelt.setValue(25000)  # Set default value
+        layout.addWidget(capitalLabel, alignment=Qt.AlignHCenter)  # Center the label horizontally
+        layout.addWidget(self.capitalLabel, alignment=Qt.AlignHCenter)  # Center the input horizontally
 
-        button_layout = QHBoxLayout()  # Horizontal layout for buttons
-        back_button = QPushButton("← Back")  # Back button
-        forward_button = QPushButton("→ Start Game")  # Start game button
-        button_layout.addWidget(back_button, alignment=Qt.AlignLeft)  # Align back button left
-        button_layout.addWidget(forward_button, alignment=Qt.AlignRight)  # Align start button right
+        buttonLayout = QHBoxLayout()  # Horizontal layout for buttons
+        backButton = QPushButton("← Back")  # Back button
+        forwardButton = QPushButton("→ Start Game")  # Start game button
+        buttonLayout.addWidget(backButton, alignment=Qt.AlignLeft)  # Align back button left
+        buttonLayout.addWidget(forwardButton, alignment=Qt.AlignRight)  # Align start button right
 
-        layout.addLayout(button_layout)  # Add button layout at bottom of the vertical layout
+        layout.addLayout(buttonLayout)  # Add button layout at bottom of the vertical layout
 
-        back_button.clicked.connect(self.go_back)  # Connect back button to go_back function
-        forward_button.clicked.connect(self.start_game)  # Connect start button to start_game function
+        backButton.clicked.connect(self.goBack)  # Connect back button to goBack function
+        forwardButton.clicked.connect(self.goForward)  # Connect start button to goForward function
 
-    def go_back(self):
-        print("Going back...")  # Placeholder action for back button
+    def goBack(self):
+        print("Going back...")  # back button
 
-    def start_game(self):
-        print("Starting game...")  # Placeholder action for start button
+    def goForward(self):
+        print("Starting game...")  # start button
 
 def main():
     app = QApplication(sys.argv)  # Create QApplication instance
